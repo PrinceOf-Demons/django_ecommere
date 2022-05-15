@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ecommere',
     'usermanagement',
     'productsview',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [

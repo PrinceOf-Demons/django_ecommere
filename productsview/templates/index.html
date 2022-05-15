@@ -1,52 +1,5 @@
 {% comment %} 
-        {% block bar %}
-            {% include "topbar.html" %}
-        {% endblock %}
-        <div class=" mt-3">
-            <p>x</p>
-        </div>
-        <div class = "container">
-            <h5>BOOK</h5>
-            <div class="row mt-5">
-                {% if allBook != None %}
-                {% for book in allBook %}
-                <div class="col-4">
-                    <button class="btn btn-outline-primary" onclick="get_Detail({{book.id}}, '{{book.title}}')" >
-                        <div class=" bg-primary text-white rounded">
-                            <p>{{book.title}}</p>
-                            <img src="{{book.image}}" alt="..." class="img-thumbnail" width="200px" height= "200px">
-                            <p>{{book.currentprice}} VND</p>
-                            <p>{{book.language}}</p>
-                            <p>{{book.discount}} %</p>
-                        </div>
-                    </button>
-                </div>
-                {% endfor %}
-                {% endif %}              
-
-            </div>
-        </div>
-
-        <div class = "container">
-            <h5>Laptop</h5>
-            <div class="row mt-5">              
-                {% for lap in allLaptop %}
-                <div class="col-4">
-                    <button class="btn btn-outline-primary" onclick="get_Detail({{lap.id}}, '{{lap.name}}')" >
-                        <div class=" bg-primary text-white rounded">
-                            <p>{{lap.name}}</p>
-                            <img src="{{lap.image}}" alt="..." class="img-thumbnail" width="200px" height= "200px">
-                            <p>{{lap.currentprice}} VND</p>
-                            
-                            <p>{{lap.discount}} %</p>
-                        </div>
-                    </button>
-                </div>
-                {% endfor %}
-
-            </div>
-            
-        </div>
+      
         <script>
             function get_Detail(valID, valName){
                 console.log(valID, valName);
@@ -195,9 +148,9 @@
                   <div class="col-lg-3 col-md-3 all des">
                     <div class="product-item">
                       {% comment %} <a href="/user/productdetails/{{it.id}}"><img src="/images/{{it.productid.img}}" height="400" width="400" alt=""></a> {% endcomment %}
-                      <a href="/user/productdetails/{{it.id}}"><img src="{{it.image}}" style="height: 300px " alt=""></a>
+                      <a href="/detailLaptop/{{it.id}}"><img src="{{it.image}}" style="height: 300px " alt=""></a>
                       <div class="down-content">
-                        <a href="/user/productdetails/{{it.id}}"><h4>{{it.name}} </h4></a>
+                        <a href="/detailLaptop/{{it.id}}"><h4>{{it.name}} </h4></a>
                         <h6>-{{it.discount}} %</6>
                         <h5>{{it.currentprice}} VND</h5>
                         
@@ -231,13 +184,13 @@
               <div class="filters-content">
                 <div class="row grid">
           
-                {% for it in allLaptop %}
+                {% for it in allClothes %}
                   <div class="col-lg-3 col-md-3 all des">
                     <div class="product-item">
                       {% comment %} <a href="/user/productdetails/{{it.id}}"><img src="/images/{{it.productid.img}}" height="400" width="400" alt=""></a> {% endcomment %}
-                      <a href="/user/productdetails/{{it.id}}"><img src="{{it.image}}" style="height: 300px " alt=""></a>
+                      <a href="/detailClothes/{{it.id}}"><img src="{{it.image}}" style="height: 300px " alt=""></a>
                       <div class="down-content">
-                        <a href="/user/productdetails/{{it.id}}"><h4>{{it.name}} </h4></a>
+                        <a href="/detailclothes/{{it.id}}"><h4>{{it.name}} </h4></a>
                         <h6>-{{it.discount}} %</6>
                         <h5>{{it.currentprice}} VND</h5>
                         

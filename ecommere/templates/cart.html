@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    {% load static %}
+    {% load mathfilters %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Online Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{%static 'assets/css/fontawesome.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/templatemo-sixteen.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/cart.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/owl.css'%}">
+
+  </head>
+  <body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    <!-- Header -->
+    {% block bar %}
+        {% include "topbar.html" %}
+    {% endblock %}
+
+    <!-- Page Content -->
+    <h1>x</h1>
+    <h2>x</h2>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="order-summary clearfix">
+                <div class="section-title" >
+                    <h3 class="text-center">Giỏ hàng của bạn</h3>
+                </div>
+                <table class="shopping-cart-table table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center">Sản Phẩm</th>
+                            <th class="text-center">Giá</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Giảm</th>
+                            <th class="text-center">Thành tiền</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if cartBookitem != None %}
+                        {% for b in cartBookitem %}
+                        <tr>
+                            <td class="thumb">
+                                <img src="{{b.image}}"  alt=" " >
+                            </td>
+                            <td class="details text-center">{{b.name}}
+                            </td>
+                            <td class="price text-center "><strong>
+                                {{b.currentprice}}
+                            </strong></td>
+                            <td class="qty text-center "><strong>{{b.quantity}}</strong></td>
+                            <td class="details text-center">{{b.discount}} %
+                            </td>
+                            <td class="total text-center "><strong class="primary-color "> {{b.price}}
+                            </strong></td>
+                            <td class="text-right "><a href="/deletecartitem/book/{{b.id}}" onclick="return confirm( 'Xóa mặt hàng! Bạn có chắc chắn không?') " class="main-btn icon-btn "><i class="fa fa-close"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                        {% if laptop != None %}
+                        {% for b in laptop %}
+                        <tr>
+                            <td class="thumb">
+                                <img src="{{b.image}}"  alt=" " >
+                            </td>
+                            <td class="details text-center">{{b.name}}
+                            </td>
+                            <td class="price text-center "><strong>
+                                {{b.currentprice}}
+                            </strong></td>
+                            <td class="qty text-center "><strong>1</strong></td>
+                            <td class="details text-center">{{b.discount}} %
+                            </td>
+                            <td class="total text-center "><strong class="primary-color "> 
+                                {% with p=b.currentprice d=100|sub:b.discount %}
+                                    {{ p|mul:d|div:100 }}
+                                {% endwith %}
+                            </strong></td>
+                            <td class="text-right "><a href="/deletecartitem/laptop/{{b.id}}" onclick="return confirm( 'Xóa mặt hàng! Bạn có chắc chắn không?') " class="main-btn icon-btn "><i class="fa fa-close"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if clothes != None %}
+                        {% for b in clothes %}
+                        <tr>
+                            <td class="thumb">
+                                <img src="{{b.image}}"  alt=" " >
+                            </td>
+                            <td class="details text-center">{{b.name}}
+                            </td>
+                            <td class="price text-center "><strong>
+                                {{b.currentprice}}
+                            </strong></td>
+                            <td class="qty text-center "><strong>1</strong></td>
+                            <td class="details text-center">{{b.discount}} %
+                            </td>
+                            <td class="total text-center "><strong class="primary-color "> 
+                                {% with p=b.currentprice d=100|sub:b.discount %}
+                                    {{ p|mul:d|div:100 }}
+                                {% endwith %}
+                            </strong></td>
+                            <td class="text-right "><a href="/deletecartitem/clothes/{{b.id}}" onclick="return confirm( 'Xóa mặt hàng! Bạn có chắc chắn không?') " class="main-btn icon-btn "><i class="fa fa-close"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="empty " colspan="2 "></th>
+                            <th>Tổng tiền giỏ hàng</th>
+                            
+                            <th colspan="2 " class="sub-total ">{{cart.total}} VND</th>
+                        </tr>
+                        {% comment %} <tr>
+                            <th class="empty " colspan="2 "></th>
+                            <th>Shipping</th>
+                            <td colspan="2 ">Free Shipping</td>
+                        </tr>
+                        <tr>
+                            <th class="empty " colspan="2 "></th>
+                            <th>Total</th>
+                            <th colspan="2 " class="total ">{{total}}</th>
+                        </tr> {% endcomment %}
+                    </tfoot>
+                </table>
+                <div style="text-align: center; ">
+                    <form action="checkout" id="gocheckout">
+                        <a onclick='checkquantity()' class=" btn btn-primary ">Thanh toán</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; 2021 Team2 BoEC Co., Ltd.
+            
+            - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{%static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{%static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{%static 'assets/js/custom.js'%}"></script>
+    <script src="{%static 'assets/js/owl.js'%}"></script>
+    <script src="{%static 'assets/js/slick.js'%}"></script>
+    <script src="{%static 'assets/js/isotope.js'%}"></script>
+    <script src="{%static 'assets/js/accordions.js'%}"></script>
+
+    <script>
+      function checkquantity(){ //
+          rows = document.getElementsByClassName('thumb');
+          if(rows.length ==0){
+            alert('Chưa có sản phẩm nào trong giỏ!');
+            return;
+
+          }
+          else{
+            document.getElementById('gocheckout').submit();
+          }
+      }
+    </script>
+    <script language = "text/Javascript"> 
+
+      
+      checkquantity();
+
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+      
+
+    </script>
+
+
+  </body>
+
+</html>
+

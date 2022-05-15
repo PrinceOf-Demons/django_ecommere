@@ -1,51 +1,3 @@
-{% comment %} <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>Online Store</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"  rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    </head>
-    <body>
-        {% block bar %}
-            {% include "topbar.html" %}
-        {% endblock %}
-        <div class=" mt-3">
-            <p>x</p>
-        </div>
-        
-        <div class = "container">
-            <div class="row mt-5">
-                <div class="col">
-                    {% for ob in obj %}
-                    
-                    <div class=" bg-primary text-white rounded">
-                        <p>{{ob.title}}</p>
-                        <img src="{{ob.image}}" alt="..." class="img-thumbnail" width="200px" height= "200px">
-                        <p>{{ob.currentprice}} VND</p>
-                        <p>{{ob.language}}</p>
-                        <p>{{ob.discount}} %</p>
-                        <p>{{ob.summary}}</p>
-                        <p>{{ob.barcode}}</p>
-                    </div>
-                    
-                    {% endfor %}
-                </div>
-    
-            </div>
-            
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    </body>
-</html> {% endcomment %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,18 +38,6 @@
     {% endblock %}
 
     <!-- Page Content -->
-    {% comment %} <div class="page-heading products-heading header-text">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-content">
-              <h4>new arrivals</h4>
-              <h2>Team2 products</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>  {% endcomment %}
     <div>
         <h1>x</h1>
     </div>
@@ -124,28 +64,23 @@
                     <div class="product-view">
                         <div class="product product-details">
                             {% for ob in book %}
-                                <h2 class="mb-3"> {{ob.title}} </h2>
-                            {% endfor %}
-                            <form action="/user/additem" method="post"  id="addchart-form" > 
-                                {% csrf_token %}
+                                <h2 class="mb-3"> {{ob.title}} </h2>                   
+                            
                                 <div id="SelectedProduct">
-                                    <div class="mb-3">
-                                        {% for it in book %}
-                                            <h3>Giá: {{it.currentprice}} VND</h3>
-                                            <h5>Giảm giá: {{it.discount}} %</h5>
-                                        {% endfor %}
+                                    <div class="mb-3">                                   
+                                        <h3>Giá: {{ob.currentprice}} VND</h3>
+                                        <h5>Giảm giá: {{ob.discount}} %</h5>                                     
                                     </div>
                                     
                                     <div class="qty-input">
                                         <label >Số lượng: </span>
-                                        <input class=" form-control" type="number" value="1" name="quantity">
-                                        
+                                        <input class=" form-control" id="number" value="1" name="quantity"> 
                                     </div>    
                                 </div>
-                                <button type="submit" class="btn btn-primary ">
+                                <button onclick="addToCart('book', {{ob.id}})" class="btn btn-primary">
                                     <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                                 </button>
-                            </form>
+                            {% endfor %}
                             
                         </div>
                     </div>
@@ -203,6 +138,7 @@
                                         <span style="display: inline-block ">{{b.address}}</span>
                                     {% endfor %}
                                 </div>
+<!--Comment-->                                
                                 <div role="tabpanel" class="tab-pane fade" id="tab2">
                                     <div class="user-comment">
                                         <form action="/user/addcomment" class="submit-comment mt-3" method="post">
@@ -246,6 +182,20 @@
       </div>
     </footer>
 
+    <script>
+        function addToCart(type, val){
+            qty = document.getElementById('number').value;
+   
+            $.ajax({
+                type: "GET",
+                url: "/addtocart/"+type+"/"+val+"/"+qty,
+                
+                success: function (response) {
+                  alert(response);
+                }
+            });
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="{%static 'vendor/jquery/jquery.min.js'%}"></script>
