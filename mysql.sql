@@ -351,7 +351,7 @@ CREATE TABLE `cart` (
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `total` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,7 +360,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,'False','Default Cart',0);
+INSERT INTO `cart` VALUES (1,'False','Default Cart',0),(2,'False','',1428800);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,7 +383,7 @@ CREATE TABLE `cart_bookitem` (
   KEY `FKCart_Booki910497` (`bookitemid`),
   CONSTRAINT `FKCart_Booki14934` FOREIGN KEY (`cartid`) REFERENCES `cart` (`id`),
   CONSTRAINT `FKCart_Booki910497` FOREIGN KEY (`bookitemid`) REFERENCES `bookitem` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,6 +392,7 @@ CREATE TABLE `cart_bookitem` (
 
 LOCK TABLES `cart_bookitem` WRITE;
 /*!40000 ALTER TABLE `cart_bookitem` DISABLE KEYS */;
+INSERT INTO `cart_bookitem` VALUES (4,2,1,'F',1,874000);
 /*!40000 ALTER TABLE `cart_bookitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +441,7 @@ CREATE TABLE `clothes` (
   KEY `FKClothes80579` (`stylesid`),
   CONSTRAINT `FKClothes317784` FOREIGN KEY (`nanufactureid`) REFERENCES `manufacture` (`id`),
   CONSTRAINT `FKClothes80579` FOREIGN KEY (`stylesid`) REFERENCES `styles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -449,6 +450,7 @@ CREATE TABLE `clothes` (
 
 LOCK TABLES `clothes` WRITE;
 /*!40000 ALTER TABLE `clothes` DISABLE KEYS */;
+INSERT INTO `clothes` VALUES (1,1,1,'762-495-3495','Quần Jean Skinny Basic Trơn','Quần Jean Skinny basic trơn thiết kế đơn giản, tôn dáng. Trang phục phù hợp dạo phố, thường ngày,đi làm... Khuyến kích giặt khô');
 /*!40000 ALTER TABLE `clothes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,7 +477,7 @@ CREATE TABLE `clothesitem` (
   KEY `FKClothesIte895511` (`clothesid`),
   CONSTRAINT `FKClothesIte788295` FOREIGN KEY (`cartid`) REFERENCES `cart` (`id`),
   CONSTRAINT `FKClothesIte895511` FOREIGN KEY (`clothesid`) REFERENCES `clothes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,6 +486,7 @@ CREATE TABLE `clothesitem` (
 
 LOCK TABLES `clothesitem` WRITE;
 /*!40000 ALTER TABLE `clothesitem` DISABLE KEYS */;
+INSERT INTO `clothesitem` VALUES (1,2,1,'Quần Jean Skinny Basic Trơn','JNQDA004',584000,'https://product.hstatic.net/1000003969/product/den_jnqda004_1_d409b07024334621b0cfb10d9fe4f8fa_master.jpg',5,0,'Giá đã bao gồm VAT'),(2,1,1,'Quần Jean Skinny Basic Trơn','JNQDA005',584000,'https://product.hstatic.net/1000003969/product/den_jnqda004_1_d409b07024334621b0cfb10d9fe4f8fa_master.jpg',5,0,'Giá đã bao gồm VAT');
 /*!40000 ALTER TABLE `clothesitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -740,7 +743,7 @@ CREATE TABLE `laptopitem` (
   KEY `FKLaptopItem826445` (`cartid`),
   CONSTRAINT `FKLaptopItem489593` FOREIGN KEY (`laptopid`) REFERENCES `laptop` (`id`),
   CONSTRAINT `FKLaptopItem826445` FOREIGN KEY (`cartid`) REFERENCES `cart` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -749,7 +752,7 @@ CREATE TABLE `laptopitem` (
 
 LOCK TABLES `laptopitem` WRITE;
 /*!40000 ALTER TABLE `laptopitem` DISABLE KEYS */;
-INSERT INTO `laptopitem` VALUES (1,1,1,'','Dell001',20000000,'https://laptopaz.vn/media/product/1078_dell_5577__1_.jpg',5,0,'');
+INSERT INTO `laptopitem` VALUES (1,1,1,'Laptop Dell 5577','Dell001',20000000,'https://laptopaz.vn/media/product/1078_dell_5577__1_.jpg',5,0,''),(2,1,1,'Laptop Dell 5577','Dell002',20000000,'https://laptopaz.vn/media/product/1078_dell_5577__1_.jpg',5,0,''),(3,1,1,'Laptop Dell 5577','Dell003',20000000,'https://laptopaz.vn/media/product/1078_dell_5577__1_.jpg',5,0,'');
 /*!40000 ALTER TABLE `laptopitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -766,7 +769,7 @@ CREATE TABLE `manufacture` (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -775,6 +778,7 @@ CREATE TABLE `manufacture` (
 
 LOCK TABLES `manufacture` WRITE;
 /*!40000 ALTER TABLE `manufacture` DISABLE KEYS */;
+INSERT INTO `manufacture` VALUES (1,'JUNO','355 Nguyễn Văn Cừ, Long Biên, Hà Nội','');
 /*!40000 ALTER TABLE `manufacture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -937,7 +941,7 @@ CREATE TABLE `styles` (
   `material` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -946,6 +950,7 @@ CREATE TABLE `styles` (
 
 LOCK TABLES `styles` WRITE;
 /*!40000 ALTER TABLE `styles` DISABLE KEYS */;
+INSERT INTO `styles` VALUES (1,'công sở','S, M, L','Đen, Xanh-Đen','Denim','Quần jeen');
 /*!40000 ALTER TABLE `styles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -986,4 +991,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-15 14:11:06
+-- Dump completed on 2022-05-15 22:46:15
