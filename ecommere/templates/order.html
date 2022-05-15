@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    
+        <title>Team 2 BoEC</title>
+    
+        <!-- Bootstrap core CSS -->
+        <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    
+    
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="{%static 'assets/css/fontawesome.css'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/templatemo-sixteen.css'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/owl.css'%}">
+    
+      </head>
+</head>
+<body>
+    <header class="" style="position: fixed;">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="/user/customer"><h2>Team 2 <em>BoEC</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/customer">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li> 
+                <li class="nav-item ">
+                  <a class="nav-link" href="/user/customer">Products</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/user/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/">Log out</a>
+                </li>
+                   <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/profile.php?id=100068979251175">
+                  <font size="5px;" color="red"><i class="fa fa-facebook"></i></font></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <div class="content">
+   
+    <div class="content-body">
+        <form action="/user/docheckout" id="checkoutform" style="width:100%; height:100%; position:absolute;" method="post">
+            {% csrf_token %}
+            <div class="left">
+                <div class="lef1 " style="text-align: center;font-weight: bold;margin-top: 25px;">SHIPPING DETAILS</div>
+                <div class="border " style="background-color: gray;width: 70%;height: 1px;margin-left: 100px;margin-top: 10px;">
+                <div class="border-left" style="width: 20%;height: 1px;background-color: red;"></div>
+            </div>
+          <div class="input1">
+              <label class="" style="font-weight: bold;margin-left: 100px;margin-top: 10px">First name:</label>
+              <input class= "form-control" type="text" name="firstName" value="{{fullname.first}}" style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+           <div class="input2">
+              <div class="name1" style="font-weight: bold;margin-left: 100px;margin-top: 10px">Last name:</div>
+              <input type="text" name="lastName" value="{{fullname.last}}" style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+           <div class="input3">
+              <div class="name1" style="font-weight: bold;margin-left: 100px;margin-top: 10px">Address:</div>
+              <input type="text" name="address" value="{{address.homenum}}, {{address.street}}, {{address.district}}" style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+           <div class="input4">
+              <div class="name1" style="font-weight: bold;margin-left: 100px;margin-top: 10px">Phone:</div>
+              <input type="text" name="phone"  value="{{user.phone}}" style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+           <div class="input5">
+              <div class="name1" style="font-weight: bold;margin-left: 100px;margin-top: 10px">City</div>
+              <input type="text" name="city"  value="{{address.city}}"  style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+           <div class="input6">
+              <div class="name1" style="font-weight: bold;margin-left: 100px;margin-top: 10px">Country:</div>
+              <input type="text" name="country" value="{{address.country}}" style="margin-left: 100px;margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+      </div>
+      <div class="right">
+           <div class="right1" style="font-weight: bold;margin-top: 25px;margin-left: 135px;">PAYMENT INFOMATION</div>
+           <div class="border1" style="background-color: gray;width: 70%;height: 1px;margin-top: 10px;">
+              <div class="border-right" style="width: 20%;height: 1px;background-color: red;"></div>
+          </div>
+          <div class="input7">
+              <div class="name1" style="font-weight: bold;margin-top: 10px">Total: VND</div>
+              <input type="text"  id="total" name="totalCost" style="margin-top: 10px;height: 25px;width: 69%" value="{{total}}">
+          </div> 
+          <div class="input8">
+              <div class="name1" style="font-weight: bold;margin-top: 10px">Credit Card Holder</div>
+              <select id="paymentType" onchange="changePaymentType()" name="paymentType" style="margin-top: 10px;height: 32px;width: 70%">
+                <option value="VISA">VISA</option>
+                <option value="Debit Card">Debit Card</option>
+               
+            </select>
+          </div> 
+          <div class="input9">
+              <div class="name1" style="font-weight: bold;margin-top: 10px">Credit Cart Number</div>
+              <input type="text" name="creditCardNumber" style="margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+          <div class="input10">
+              <div class="name1" style="font-weight: bold;margin-top: 10px">Credit Exp Date/Year</div>
+              <input type="Date" name="expDate" style="margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+          <div class="input11">
+              <div class="name1" style="font-weight: bold;margin-top: 10px">Security Number</div>
+              <input type="text" name="sercurityNumber" style="margin-top: 10px;height: 25px;width: 69%">
+          </div> 
+          <div class="input123">
+            <div class="name1" style="font-weight: bold;margin-top: 10px">Delivery</div>
+            <select id="shipmentType" onchange="changeShipmentType()" name="shipmentType" style="margin-top: 10px;height: 32px;width: 70%">
+              <option value="COD">COD</option>
+              <option value="Flash Ship">Flash Ship</option>
+              <option value="Post">Post</option>
+          </select>
+        </div> 
+      </div>  
+
+      <div class="checkout">
+        <div class="bang1" style="width: 301px;height: 104px;background-color: #f5f1f1;border: 1px solid #f5f1f1;margin-top: -1px;position:absolute;right: 700px;top: 55px;">
+            <div class="sub" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray">
+                <p style="margin-left: 5px;margin-top: 5px">SUBTOTAL</p>
+            </div>
+            <div class="ship" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray">
+                 <p style="margin-left: 5px;margin-top: 5px">SHIPPING FEE</p>
+            </div>
+            <div class="total" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray">
+                 <p style="margin-left: 5px;margin-top: 5px">TOTAL</p>
+            </div>
+        </div>
+         <div class="bang2" style="width: 301px;height: 104px;background-color: #f5f1f1;border: 1px solid #f5f1f1;position: absolute;top:54px;right: 400px;">
+            <div class="sub" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray;margin-left: -1px">
+                <p id="subtotal" style="margin-left: 5px;margin-top: 5px; display: inline-block;">0</p>
+                <p  style="margin-left: 5px;margin-top: 5px; display: inline-block;">VND</p>
+            </div>
+            <div class="ship" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray;margin-left: -1px">
+                 <p id="shippingFee" style="margin-left: 5px;margin-top: 5px; display: inline-block;">0</p>
+                 <p  style="margin-left: 5px;margin-top: 5px; display: inline-block;">VND</p>
+            </div>
+            <div class="total" style="width: 300px;height: 33px;font-weight: bold;border: 1px solid gray;margin-left: -1px">
+                 <input id='totalMoney' name='totalMoney' value='0' style="margin-left: 5px;margin-top: 5px; display: inline-block;">
+                 <p  style="margin-left: 5px;margin-top: 5px; display: inline-block;">VND</p>
+            </div>
+        </div>
+      </div>
+    </form>
+      </div>
+      <div class="content-button" style="width: 100%;height: 50px;background-color: white;">
+          <button class="a" type="submit" form="checkoutform" style="height: 30px;width: 170px;margin-left: 45%;cursor: pointer;">COMPLETE ORDER</button>
+      </div>
+      <div class="content-text" style="width: 100%;height: 30px;font-weight: bold;text-align: center;background-color: white">SHOPCART PRODUCT LIST</div>
+       <div class="line" style="background-color: gray;width: 74%;height: 1px;margin-left: 160px;margin-top: 5px;">
+              <div class="border-left" style="width: 20%;height: 1px;background-color: red;"></div>
+          </div>
+          <div class="table" style="width: 100%;height: 50px;display: flex;">
+              <p style="margin-left: 160px;">PRODUCT</p>
+              <p style=" padding-left: 160px;">PRICE</p>
+              <p style=" padding-left: 160px;">QUALITY</p>
+              <p style=" padding-left: 200px;">TOTAL</p>
+          </div>
+          <div class="line3" style="background-color: gray;width: 74%;height: 1px;margin-left: 160px;margin-top: 5px;"></div>
+          
+          {% for cartitem, product, s in cartList%}
+          <div class="table" style="width: 100%;height: 50px;display: flex;">
+            <p style="margin-left: 160px; width:90px;">{{product.name}}</p>
+            <p style=" padding-left: 160px;width:80px;">{{cartitem.cost}}</p>
+            <p style=" padding-left: 160px;width:80px;">{{cartitem.quantity}}</p>
+            <p style=" padding-left: 160px;width:80px;">{{s}}</p>
+        </div>
+        {%endfor %}
+          <div class="line2" style="background-color: gray;width: 74%;height: 1px;margin-left: 160px;margin-top: 5px;"></div>
+          
+          
+
+    </div>
+    
+    <script type="text/javascript">
+        total = document.getElementById('total').value
+        totalMoney = document.getElementById('totalMoney')
+        subtotal = document.getElementById('subtotal')
+        subtotal.innerHTML = Math.round(eval(total + "*0.9"))
+        shippingFee = document.getElementById('shippingFee')
+        shippingFee.innerHTML = 20000
+        totalMoney.value = Math.round(eval(total + "*0.9 + "+ shippingFee.innerHTML))
+        
+
+        function changePaymentType(){
+            paymentType = document.getElementById('paymentType').value
+            if(paymentType ==="VISA"){
+                subtotal.innerHTML = Math.round(eval(total + "*0.9"))
+                totalMoney.value = Math.round(eval(subtotal.innerHTML + " + "+ shippingFee.innerHTML))
+            }
+            else{
+                subtotal.innerHTML = Math.round(eval(total + "*0.95"))
+                totalMoney.value = Math.round(eval(subtotal.innerHTML + "+ "+ shippingFee.innerHTML))
+            }
+        }
+
+        function changeShipmentType(){
+            shipmentType = document.getElementById('shipmentType').value
+
+            if(shipmentType === "COD"){
+                shippingFee.innerHTML = 20000
+                totalMoney.value = Math.round(eval(subtotal.innerHTML + " + "+ shippingFee.innerHTML))
+            }
+            else if(shipmentType === "Flash Ship"){
+                shippingFee.innerHTML = 30000
+                totalMoney.value = Math.round(eval(subtotal.innerHTML + " + "+ shippingFee.innerHTML))
+            }
+            else if(shipmentType === "Post"){
+                shippingFee.innerHTML = 40000
+                totalMoney.value = Math.round(eval(subtotal.innerHTML + " + "+ shippingFee.innerHTML))
+            }
+        }
+        
+    </script>
+
+</body>
+</html>
+<style>
+    body{
+        margin: 0px;
+    }
+    .header {
+        z-index: 12312;
+        position: fixed;
+        height: 100px;
+        width: 100%;
+        background-color: aquamarine;
+    }
+    .menu {
+        float: left;
+        top:100px;
+        position: fixed;
+        z-index: 12;
+        height:650px;
+        width: 10%;
+        background-color: aquamarine;
+    }
+
+    .content{
+        position: absolute;
+        float: right;
+        top: 100px;
+        left: 10%;
+        height: calc(100% - 100px);
+        width: 90%;
+        background-color: rgba(255, 187, 0, 0.993);
+    }
+    h1{
+        margin-left: 10px;
+    }
+    .logo{
+        position: absolute;
+        height:70px;
+        width:100px;
+        margin-left: 10px;
+        margin-top: 10px;
+        float: left;
+    }
+    .cart{
+        position: absolute;
+        float: right;
+        right:10px;
+        height:100%;
+        width: 100px;
+        
+    }
+    .cart img{
+        position: absolute;
+        margin-top: 22px;
+        margin-left: 22px;
+        width:50%;
+        height:50%;
+    }
+    .cart img:hover{
+        cursor: pointer;
+    }
+    .order-history{
+        position: absolute;
+        float: right;
+        right:110px;
+        
+        width:100px;
+        height:100%;
+
+    }
+    .order-history a{
+        position: absolute;
+        margin-top: 33px;
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+    }
+    .notification{
+        position: absolute;
+        float: right;
+        right:210px;
+        
+        width:100px;
+        height:100%;
+
+    }
+    .notification img{
+        position: absolute;
+        height: 30%;
+        width: 30%;
+        top: 30px;
+        left: 35px;
+    }
+    .notification img:hover{
+        cursor: pointer;
+    }
+    .content-content{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+     
+        
+    }
+    .left{
+        float: left;
+        position: absolute;
+        width: 50%
+    }
+    .right{
+        float: right;
+        right: 0px;
+        position: absolute;
+        width: 50%;
+    }
+    .content-body{
+        width: 100%;
+        height: 800px;
+         display: flex;
+         background-color: white;
+    }
+    .content-header{
+        width: 100%;
+        height: 35px;
+       background-color: white;
+
+    }
+    a:hover{
+        background: #c24119;
+    }
+   
+    .bang1 p{
+        font-weight: bold;
+
+    }
+    .bang2 p{
+        font-weight: bold;
+    }
+    .table p{
+        font-weight: bold;
+    }
+    .footer{
+        width: 100%;
+        height: 250px;
+        background-color: #f5f1f1
+
+    }
+    ul li p{
+        cursor: pointer;
+    }
+    .image{
+    background-image: url('avatar-default.png');
+    background-repeat:no-repeat;
+    background-size: auto;
+    background-position: center;
+    width: 40px;height: 40px;
+    position: absolute;
+    right: 250px;
+    bottom:30px;
+    cursor: pointer;
+    }
+    .image1{
+    background-image: url('cart.png');
+    background-repeat:no-repeat;
+    background-size: auto;
+    background-position: center;
+    width: 40px;height: 40px;
+    position: absolute;
+    right: 200px;
+    bottom:30px;
+    cursor: pointer;
+    }
+    .checkout{
+        position: absolute;
+        bottom: 10px;
+        float: right;
+        right: 0px;
+        height:120px;
+        width: 100%;
+        
+    }
+    .bang1{
+        position: absolute;
+        float: right;
+        right: 0px;
+    }
+    .bang2{
+        position: absolute;
+        float: right;
+        right: 0px;
+    }
+    
+    #totalMoney{
+        font-weight: bold;
+        background-color:#f5f1f1;
+        border: 0px;
+        font: inherit;
+        width: 80px;
+    }
+       
+</style>
+

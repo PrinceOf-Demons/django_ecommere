@@ -1,0 +1,265 @@
+{% comment %} <!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Online Store</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"  rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        {% block bar %}
+            {% include "topbar.html" %}
+        {% endblock %}
+        <div class=" mt-3">
+            <p>x</p>
+        </div>
+        
+        <div class = "container">
+            <div class="row mt-5">
+                <div class="col">
+                    {% for ob in obj %}
+                    
+                    <div class=" bg-primary text-white rounded">
+                        <p>{{ob.title}}</p>
+                        <img src="{{ob.image}}" alt="..." class="img-thumbnail" width="200px" height= "200px">
+                        <p>{{ob.currentprice}} VND</p>
+                        <p>{{ob.language}}</p>
+                        <p>{{ob.discount}} %</p>
+                        <p>{{ob.summary}}</p>
+                        <p>{{ob.barcode}}</p>
+                    </div>
+                    
+                    {% endfor %}
+                </div>
+    
+            </div>
+            
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Team 2 BoEC</title>
+
+     <!-- Bootstrap core CSS -->
+    <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{%static 'assets/css/fontawesome.css'%}">
+    <link rel="stylesheet" href="/static/assets/css/detail.css">
+    <link rel="stylesheet" href="{%static 'assets/css/templatemo-sixteen.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/owl.css'%}">
+  </head>
+  <body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    <!-- Header -->
+    {% block bar %}
+      {% include "topbar.html" %}
+    {% endblock %}
+
+    <!-- Page Content -->
+    {% comment %} <div class="page-heading products-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>new arrivals</h4>
+              <h2>Team2 products</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  {% endcomment %}
+    <div>
+        <h1>x</h1>
+    </div>
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="product-view">
+                        
+                        <div class="product-view slick-slide slick-current">
+                            {% for it in book %}
+                                <img src="{{it.image}}" style="height: 400px " alt="">                               
+                            {% endfor %}
+                        </div>
+                    </div>
+                                    
+                </div>
+                <!--  Product Details -->
+                <div class="col-md-8 mt-5">
+                    <div class="product-view">
+                        <div class="product product-details">
+                            {% for ob in book %}
+                                <h2 class="mb-3"> {{ob.title}} </h2>
+                            {% endfor %}
+                            <form action="/user/additem" method="post"  id="addchart-form" > 
+                                {% csrf_token %}
+                                <div id="SelectedProduct">
+                                    <div class="mb-3">
+                                        {% for it in book %}
+                                            <h3>Giá: {{it.currentprice}} VND</h3>
+                                            <h5>Giảm giá: {{it.discount}} %</h5>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                    <div class="qty-input">
+                                        <label >Số lượng: </span>
+                                        <input class=" form-control" type="number" value="1" name="quantity">
+                                        
+                                    </div>    
+                                </div>
+                                <button type="submit" class="btn btn-primary ">
+                                    <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="product product-details ">                 
+                    <div class="col-md-12">
+                        <div class="">
+                            <div>
+                                <div class="product-rating">
+                                    {% comment %} <i class="fa fa-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+                                    <i class="fa fa-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+                                    {{ product.avaregereview |stringformat:".2f"}} {% endcomment %}
+                                    
+                                </div>
+                            
+                            </div>
+
+                            <div class="">
+                                <ul class="nav nav-tabs " role="tablist">
+                                    <li class="nav-item ">
+                                        <a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">Chi tiết</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="#tab2" role="tab" data-toggle="tab">Bình luận</a>
+                                    </li>
+                                </ul>                              
+                                <div class="comment">
+                                
+                                </div>
+                            </div>  
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active mt-3" id="tab1" aria-labelledby="tab1">
+                                    <h5 class="mb-3">Thông tin sản phẩm</h5>
+                                    {% for b in book %}
+                                        <span style="display: inline-block ">{{b.barcode}}</span>
+                                        <span style="display: inline-block ">{{b.summary}}</span>
+                                        <span style="display: inline-block ">{{b.language}}</span>
+                                        <br>
+                                        <span style="display: inline-block ">{{b.numberofpage}} trang</span>
+                                    {% endfor %}
+                                    <br>
+                                    <h6>Tác giả:</h6>
+                                    {% for b in author %}
+                                        <span style="display: inline-block ">{{b.name}}</span>
+                                        <span style="display: inline-block ">{{b.biography}}</span>
+                                    {% endfor %}
+                                    <br>
+                                    <h6>Xuất bản:</h6>
+                                    {% for b in publisher %}
+                                        <span style="display: inline-block ">{{b.name}}</span>
+                                        <br>
+                                        <span style="display: inline-block ">{{b.address}}</span>
+                                    {% endfor %}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab2">
+                                    <div class="user-comment">
+                                        <form action="/user/addcomment" class="submit-comment mt-3" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="itemIDcomment" value="{{item.id}}">
+                                            <textarea class="form-control" id="" cols="50" rows="4" name="content" placeholder="Nhập bình luận về sản phẩm"></textarea>
+                                            <button class="btn btn-primary mt-1" type="submit">Gửi</button>
+                                        </form>       
+                                    </div>
+                                    <div class="list-comment">
+                                        <h5 class="mt-3">Các bình luận trước đó:</h5>
+                                        <ul >
+                                            {% comment %} {% for comment, fn in comments %}
+                                                <li class="cmt-box">{{fn.first}} {{fn.last}}: {{ comment.content }}</li>
+                                                <li> <br></li>
+                                            {%endfor %} {% endcomment %}
+                                        </ul>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>                                            
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; 2021 Team2 BoEC Co., Ltd.
+            
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{%static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{%static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{%static 'assets/js/custom.js'%}"></script>
+    <script src="{%static 'assets/js/owl.js'%}"></script>
+    <script src="{%static 'assets/js/slick.js'%}"></script>
+    <script src="{%static 'assets/js/isotope.js'%}"></script>
+    <script src="{%static 'assets/js/accordions.js'%}"></script>
+
+
+  </body>
+
+</html>
