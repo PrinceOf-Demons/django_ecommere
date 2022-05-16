@@ -5,4 +5,5 @@ urlpatterns = [
     
     path('cart/',fun.getCart),
     path('deletecartitem/<str:type>/<int:id>', fun.deleteCartItem),
+    path('checkout/', fun.checkout, name='chekout'),
 ]

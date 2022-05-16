@@ -13,13 +13,17 @@ def get_OnlineStore(request):
     
     allClothes = Clothes.objects.raw("select DISTINCT clothes.id, clothes.name, clothesitem.image, clothesitem.discount, clothesitem.currentprice from clothes join clothesitem on clothes.id = clothesitem.clothesid;")
 
+    user_id = request.COOKIES.get('userID','')
+
+    user_name = Fullname.objects.filter(customerid = user_id)[0]
+
     cate = Category.objects.all()
     types = Type.objects.all()
     context = {
         'allLaptop': allLaptop,
         'allBook' : allBook,
         'allClothes': allClothes,
-
+        'user': user_name,
     }
     return render(request, 'index.html', context)
 

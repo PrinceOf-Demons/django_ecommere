@@ -1,34 +1,4 @@
-{% comment %} 
-      
-        <script>
-            function get_Detail(valID, valName){
-                console.log(valID, valName);
-                $.ajax({
-                    type: 'GET',
-                    url: "{% url 'getDetail' %}",
-                    data: {'id': valID, 'name': valName},
-                    success: function(result){
-                        var urlName = encodeURIComponent(valName);
-                        location.replace("{% url 'getDetail' %}?id="+valID+"&name="+urlName);
-                    }
-                });          
-            }
-        </script>
-        <script>
-            function filterList(str, val){
-                console.log(str, val);
-                $.ajax({
-                    type: 'GET',
-                    url: "{% url 'filter' %}",
-                    data: {'id': val, 'name': str},
-                    success: function(result){
-                        var urlName = encodeURIComponent(valName);
-                        //location.replace("{% url 'getDetail' %}?id="+valID+"&name="+urlName);
-                    }
-                });     
-            }
-        </script>
-{% endcomment %}
+
 <!DOCTYPE html>
 <html lang="en">
 

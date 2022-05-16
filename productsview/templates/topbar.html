@@ -1,44 +1,4 @@
 
-    {% comment %} <div>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar w/ text</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href=" {% url 'getHome' %}">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Book Category </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% for cat in cate %}
-                      <li> <a class="dropdown-item" href="{% url 'filter' %}?id={{cat.id}}&name=book" onclick=filterList('book',{{cat.id}})>{{cat.nameCat}}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Laptop Type </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% for cat in types %}
-                      <li> <a class="dropdown-item" href="{% url 'filter' %}?id={{cat.id}}&name=laptop" onclick=filterList('laptop',{{cat.id}})>{{cat.descriptiontype}}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </li>
-                </ul>
-                <span class="navbar-text">
-                  Account
-                </span>
-              </div>
-            </div>
-          </nav>
-    </div> {% endcomment %}
-
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -68,10 +28,11 @@
                 <a class="nav-link" href="/cart/">Giỏ hàng</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/user/">Đăng xuất</a>
+                <a class="nav-link" href="/">Đăng xuất</a>
               </li>
-               <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/profile.php?id=100068979251175">
-                <font size="5px;" color="red"><i class="fa fa-facebook"></i></font></a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="">{{user.firstname}} {{user.midname}} {{user.lastname}}</a>
+              </li>
             </ul>
           </div>
         </div>

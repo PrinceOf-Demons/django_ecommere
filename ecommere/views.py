@@ -42,3 +42,25 @@ def deleteCartItem (request, type, id):
             Cart.objects.filter(id = cart.id).update(total = cart.total - lap.currentprice * (100 - lap.discount) / 100)
             break
     return getCart(request)
+
+def checkout(request):
+    if request.method == 'POST':
+        abc = 0
+        
+    else:
+        cart = Cart.objects.all().last()
+
+        cartidstr = str(cart.id)
+        cartBookitem = CartBookitem.objects.raw('select cart_bookitem.id,cartid,bookitemid,quantity,price,name,currentprice,image,discount from cart_bookitem join bookitem on cart_bookitem.bookitemid = bookitem.id where cartid='+cartidstr)
+
+        laptop = Laptopitem.objects.filter(cartid = cart.id)
+
+        clothes = Clothesitem.objects.filter(cartid = cart.id)
+
+        context = {
+            'cartBookitem': cartBookitem,
+            'laptop':laptop,
+            'clothes': clothes,
+            'cart' : cart,
+        }
+        return render(request, 'order.html', context) 
